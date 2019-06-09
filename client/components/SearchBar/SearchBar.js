@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 class SearchBar extends React.Component {
     render() {
-        const { handleInput, handleSearch } = this.props;
+        const { handleInput, handleKeyPress, handleSearch } = this.props;
         return (
             <div>
-                <input type="text" placeholder="Search..." onChange={handleInput}></input>
+                <input type="text" placeholder="Search..." onChange={handleInput} onKeyPress={handleKeyPress}></input>
                 <button type="button" onClick={handleSearch}>Search</button>
             </div>
         )
@@ -15,6 +15,7 @@ class SearchBar extends React.Component {
 
 SearchBar.propTypes = {
     handleInput: PropTypes.func.isRequired,
+    handleKeyPress: PropTypes.func.isRequired,
     handleSearch: PropTypes.func.isRequired
 }
 

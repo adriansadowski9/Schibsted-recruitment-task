@@ -2,47 +2,61 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import SearchBar from './components/SearchBar/SearchBar';
+import Images from './components/Images/Images';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            gifs: {},
-            images: {},
+            gifs: [],
+            images: [],
             searchQuery: '',
             page: 1
         }
     }
 
-    getGifs() {
+    getGifs = () => {
         axios.get('/api/gifs', {
             params: {
                 search: this.state.searchQuery,
                 page: this.state.page
             }
         })
-        .then((res) => this.setState({gifs: res.data}))
+        .then((res) => {
+            res.data.data ? 
+            this.setState({gifs: res.data.data})
+            : this.setState({gifs: []});
+        })
         .catch((error) => console.log(error));
     }
 
-    getImages() {
+    getImages = () => {
         axios.get('/api/images', {
             params: {
                 search: this.state.searchQuery,
                 page: this.state.page
             }
         })
-        .then((res) => this.setState({images: res.data}))
+        .then((res) => {
+            res.data.hits ? 
+            this.setState({images: res.data.hits})
+            : this.setState({gifs: []});
+        })
         .catch((error) => console.log(error));
     }
 
     refreshData = () => {
-        this.getGifs();
+        this.getGifs()
         this.getImages();
     }
 
     handleInput = (e) => {
         this.setState({searchQuery: e.target.value});
+    }
+
+    handleKeyPress = (e) => {
+        if (e.key === 'Enter')
+            this.refreshData();
     }
 
     componentDidMount() {
@@ -54,9 +68,13 @@ class App extends React.Component {
             <>
                 <SearchBar 
                     handleInput={this.handleInput} 
+                    handleKeyPress={this.handleKeyPress}
                     handleSearch={this.refreshData}
                 />
-                <h1>Hello World!</h1>
+                <Images 
+                    gifs={this.state.gifs}
+                    images={this.state.images}
+                />
             </>
         )
     }
