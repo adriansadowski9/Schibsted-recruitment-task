@@ -1,8 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import GlobalStyle from './assets/styles/GlobalStyle';
+import styled from 'styled-components';
+import theme from './assets/styles/theme';
 import SearchBar from './components/SearchBar/SearchBar';
 import Images from './components/Images/Images';
+
+const Container = styled.div`
+    padding: 0 15px;
+    ${theme.mq.desktop} {
+        max-width: 992px;
+        margin: 0 auto;
+    }
+`;
 
 class App extends React.Component {
     constructor(props) {
@@ -65,7 +76,8 @@ class App extends React.Component {
 
     render() {
         return (
-            <>
+            <Container>
+                <GlobalStyle/>
                 <SearchBar 
                     handleInput={this.handleInput} 
                     handleKeyPress={this.handleKeyPress}
@@ -75,7 +87,7 @@ class App extends React.Component {
                     gifs={this.state.gifs}
                     images={this.state.images}
                 />
-            </>
+            </Container>
         )
     }
 }
