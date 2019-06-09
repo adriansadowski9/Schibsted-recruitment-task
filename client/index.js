@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import theme from './assets/styles/theme';
 import SearchBar from './components/SearchBar/SearchBar';
 import Images from './components/Images/Images';
+import BottomBar from './components/BottomBar/BottomBar';
 
 const Container = styled.div`
     padding: 0 15px;
@@ -61,17 +62,41 @@ class App extends React.Component {
         this.getImages();
     }
 
+    handleReset = () => {
+        const promise = new Promise((resolve, reject) => {
+            this.setState({searchQuery: ''});
+            resolve();
+        });
+        promise.then(() => {
+            this.handleNewPage();
+        });
+    }
+
     handleInput = (e) => {
         this.setState({searchQuery: e.target.value});
     }
 
     handleKeyPress = (e) => {
         if (e.key === 'Enter')
+            this.handleNewPage();
+    }
+
+    handleNewPage = (page = 1) => {
+        const promise = new Promise((resolve, reject) => {
+            this.setState({page: page});
+            resolve();
+        })
+        promise.then(() => {
             this.refreshData();
+        });
     }
 
     componentDidMount() {
         this.refreshData();
+    }
+
+    componentDidUpdate() {
+        window.scrollTo(0, 0);
     }
 
     render() {
@@ -79,13 +104,19 @@ class App extends React.Component {
             <Container>
                 <GlobalStyle/>
                 <SearchBar 
+                    handleReset={this.handleReset}
+                    inputValue={this.state.searchQuery}
                     handleInput={this.handleInput} 
                     handleKeyPress={this.handleKeyPress}
-                    handleSearch={this.refreshData}
+                    handleSearch={() => {this.handleNewPage()}}
                 />
                 <Images 
                     gifs={this.state.gifs}
                     images={this.state.images}
+                />
+                <BottomBar
+                    page={this.state.page}
+                    handleNewPage={this.handleNewPage}
                 />
             </Container>
         )

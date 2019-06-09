@@ -24,6 +24,7 @@ const StyledHeader = styled.h1`
     background: ${theme.blue};
     color: ${theme.white};
     text-transform: uppercase;
+    cursor: pointer;
     ${theme.mq.desktop} {
         align-self: left;
         margin: 0;
@@ -50,19 +51,25 @@ const StyledButton = styled.button`
     font-family: ${theme.font.family.montserrat};
     color: ${theme.white};
     background: ${theme.blue};
-    border: none;
+    border: 1px solid ${theme.blue};
+    border-left: none;
     border-radius: 0 3px 3px 0;
     cursor: pointer;
+    transition: background .2s, color .2s;
+    :hover {
+        background: ${theme.white};
+        color: ${theme.blue};
+    }
 `;
 
 class SearchBar extends React.Component {
     render() {
-        const { handleInput, handleKeyPress, handleSearch } = this.props;
+        const { handleReset, inputValue, handleInput, handleKeyPress, handleSearch } = this.props;
         return (
             <Container>
-                <StyledHeader>Image finder</StyledHeader>
+                <StyledHeader onClick={handleReset}>Image finder</StyledHeader>
                 <SearchContainer>
-                <StyledInput type="text" placeholder="Type search query here..." onChange={handleInput} onKeyPress={handleKeyPress}></StyledInput>
+                <StyledInput type="text" placeholder="Type search query here..." value={inputValue} onChange={handleInput} onKeyPress={handleKeyPress}></StyledInput>
                 <StyledButton type="button" onClick={handleSearch}>Search</StyledButton>
                 </SearchContainer>
             </Container>
@@ -71,6 +78,8 @@ class SearchBar extends React.Component {
 }
 
 SearchBar.propTypes = {
+    handleReset: PropTypes.func.isRequired,
+    inputValue: PropTypes.string.isRequired,
     handleInput: PropTypes.func.isRequired,
     handleKeyPress: PropTypes.func.isRequired,
     handleSearch: PropTypes.func.isRequired

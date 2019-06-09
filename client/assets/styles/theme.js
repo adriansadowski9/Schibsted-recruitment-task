@@ -1,6 +1,6 @@
 const theme = {
     white: 'hsl(0, 0%, 100%)',
-    blue: 'hsl(196, 100%, 24%)',
+    blue: 'hsl(221, 67%, 30%)',
     black: 'hsl(0, 0%, 0%)',
     font: {
       size: {

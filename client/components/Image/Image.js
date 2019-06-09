@@ -7,7 +7,7 @@ const Container = styled.div`
     margin-bottom: 15px;
     transition: opacity .2s;
     :hover {
-        opacity: 0.85;
+        opacity: 0.8;
     }
 `;
 
@@ -17,7 +17,8 @@ const StyledImg = styled.img`
     border-radius: 2px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
     ${theme.mq.desktop} {
-        width: 300px;
+        width: 310px;
+        box-shadow: none;
     }
 `;
 
@@ -36,7 +37,8 @@ class Image extends React.Component {
 
 Image.propTypes = {
     src: PropTypes.string.isRequired,
-    linkTo: PropTypes.string.isRequired
+    linkTo: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
 }
 
 export default Image;

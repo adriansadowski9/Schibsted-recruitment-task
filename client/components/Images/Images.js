@@ -12,7 +12,7 @@ const Container = styled.div`
 
     ${theme.mq.desktop} {
         display: block;
-        columns:3;
+        columns: 3;
         justify-items: start;
         align-items: start;
     }
