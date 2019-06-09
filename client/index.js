@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import SearchBar from './components/SearchBar/SearchBar';
 
 class App extends React.Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class App extends React.Component {
                 page: this.state.page
             }
         })
-        .then((res) => this.setState({gifs: res.data.data}))
+        .then((res) => this.setState({gifs: res.data}))
         .catch((error) => console.log(error));
     }
 
@@ -31,20 +32,32 @@ class App extends React.Component {
                 page: this.state.page
             }
         })
-        .then((res) => this.setState({images: res.data.hits}))
+        .then((res) => this.setState({images: res.data}))
         .catch((error) => console.log(error));
     }
 
-    componentDidMount() {
+    refreshData = () => {
         this.getGifs();
         this.getImages();
     }
 
+    handleInput = (e) => {
+        this.setState({searchQuery: e.target.value});
+    }
+
+    componentDidMount() {
+        this.refreshData();
+    }
+
     render() {
         return (
-            <div>
+            <>
+                <SearchBar 
+                    handleInput={this.handleInput} 
+                    handleSearch={this.refreshData}
+                />
                 <h1>Hello World!</h1>
-            </div>
+            </>
         )
     }
 }
