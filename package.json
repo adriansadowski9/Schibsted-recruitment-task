@@ -10,13 +10,12 @@
     ]
   },
   "scripts": {
-    "start": "nodemon --ignore 'public/bundle.js' --exec 'webpack --mode development && babel-node server.js'"
+    "start": "nodemon --ignore 'public/bundle.js' --exec webpack --mode development & babel-node server.js"
   },
   "keywords": [],
   "author": "Adrian Sadowski",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.0",
     "express": "^4.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
