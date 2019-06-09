@@ -1,0 +1,36 @@
+{
+  "name": "schibsted-recruitment-task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "scripts": {
+    "start": "nodemon --ignore 'public/bundle.js' --exec webpack --mode development & babel-node server.js"
+  },
+  "keywords": [],
+  "author": "Adrian Sadowski",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^2.1.1",
+    "nodemon": "^1.19.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.33.0",
+    "webpack-cli": "^3.3.3"
+  }
+}
